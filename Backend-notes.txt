@@ -1,0 +1,349 @@
+https://nodejs.org/en/download
+
+https://www.mongodb.com/try/download/community
+
+https://code.visualstudio.com/download
+
+Open cmd and run below commands to verify node version.
+C:\>node -v      
+v24.19.0
+OR
+C:\>node --version
+
+
+C:\>npm -v
+11.17.0
+Or
+C:\>npm --version
+
+
+MongoDB 8.0.11 2008R2Plus SSL (64 bit)
+MongoDB Compass
+
+
+npm folder exists as below (If doesn't exist, later it will be created):
+C:\Users\Your-User-Name\AppData\Roaming\npm
+
+Step 1: Initialize the Project
+C:\Projects\MERN\ops-mern\ops-backend
+C:\Projects\MERN\ops-mern\ops-backend>npm init -y
+Wrote to C:\Projects\MERN\ops-mern\ops-backend\package.json:
+
+{
+  "name": "ops-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}
+
+
+
+Replace "type": "commonjs" with "type": "module"
+
+
+Open Project in VS Code IDE
+C:\Projects\MERN\ops-mern\ops-backend>code ./
+
+Step 2: Install Required Packages from VS Code Terminal
+npm install express dotenv
+
+npm install --save-dev nodemon
+
+Update package.json for auto-restart during development:
+"scripts": {
+  "start": "node src/index.js",
+  "dev": "nodemon src/index.js"
+}
+
+==================================
+Create src folder under project directory
+
+// File: src/index.js
+import express from 'express';
+const app = express();
+app.get('/', (req, res)=>{
+    res.send("Hello");
+    console.log("Get requesttttttttttt")
+});
+app.listen(5000, ()=>{
+    console.log("Application is running on 5000")
+});
+
+==================================
+and run the project from terminal:
+C:\Projects\MERN\ops-mern\ops-backend>node src/index.js
+or 
+C:\Projects\MERN\ops-mern\ops-backend>npm run dev
+
+==================================
+nodemon
+
+C:\Projects\MERN\ops-mern\ops-backend>nodemon src/index.js
+'nodemon' is not recognized as an internal or external command,
+operable program or batch file.
+
+To install nodemon globally
+C:\>npm install -g nodemon
+
+You can verify 
+C:\Users\RB120485\AppData\Roaming\npm
+
+==================================
+
+C:\Projects\MERN\ops-mern\ops-backend> npm i cors
+
+
+==================================
+
+
+// File: src/index.js
+import express from 'express';
+import cors from 'cors';
+
+const app = express();
+
+app.use(cors());
+
+app.get('/', (req, res) => {
+    res.send("Hello");
+    console.log("Get request got a hit.....iiiiiiiiiii")
+});
+app.get('/users', (req, res) => {
+    res.json([
+        {
+            "id": 1,
+            "name": "Leanne Graham",
+            "username": "Bret",
+            "email": "Sincere@april.biz",
+            "address": {
+                "street": "Kulas Light",
+                "suite": "Apt. 556",
+                "city": "Gwenborough",
+                "zipcode": "92998-3874",
+                "geo": {
+                    "lat": "-37.3159",
+                    "lng": "81.1496"
+                }
+            },
+            "phone": "1-770-736-8031 x56442",
+            "website": "hildegard.org",
+            "company": {
+                "name": "Romaguera-Crona",
+                "catchPhrase": "Multi-layered client-server neural-net",
+                "bs": "harness real-time e-markets"
+            }
+        },
+        {
+            "id": 2,
+            "name": "Ervin Howell",
+            "username": "Antonette",
+            "email": "Shanna@melissa.tv",
+            "address": {
+                "street": "Victor Plains",
+                "suite": "Suite 879",
+                "city": "Wisokyburgh",
+                "zipcode": "90566-7771",
+                "geo": {
+                    "lat": "-43.9509",
+                    "lng": "-34.4618"
+                }
+            },
+            "phone": "010-692-6593 x09125",
+            "website": "anastasia.net",
+            "company": {
+                "name": "Deckow-Crist",
+                "catchPhrase": "Proactive didactic contingency",
+                "bs": "synergize scalable supply-chains"
+            }
+        }]);
+})
+app.listen(5000, () => {
+    console.log("Application is running on 5000")
+});
+
+====================================
+
+import express from 'express';
+const app = express();
+app.get('/', (req, res)=>{  // localhost:5000/
+    // res.send("Correct response");
+    // res.send("Finished");  //Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client
+
+    // res.write("Correct response one");
+    // res.write("Correct response two");
+    // res.end("Finished"); 
+
+    // res.send("<h1>Welcome</h1><p>Thanks</p>");
+
+    res.json({msg:"Completed successfully", data:["ele", "ele2"]});
+
+    console.log("Get function");
+});
+//start server
+app.listen(5000);
+
+==================================
+
+import express from 'express';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const app = express();
+const port = 5000;
+
+// Needed for ES modules to get __dirname
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+app.get('/', (req,res)=> {
+    console.log(__filename);
+    console.log(__dirname);
+    // res.send("Hi");
+    //res.send("<h1>Welcome Rupesh!</h1><p>This is an HTML response from Express.</p>");
+    res.sendFile(path.join(__dirname, 'myhtml.html'));
+});
+app.listen(port, () => console.log(`App is running at http://localhost:${port}`));
+
+===============================
+
+res.sendFile(path.join(process.cwd(), 'index.html'));
+
+res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+
+
+res.status(200).send('Correct response one\nCorrect response two\nFinished');
+
+===============================
+
+import express from 'express';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const app = express();
+
+app.use(express.json());//To access req.body data
+//In the older version of nodejs, we need to use body-parser
+
+const filepath = fileURLToPath(import.meta.url);
+console.log("My filepath is:", filepath);
+const dirname = path.dirname(filepath);
+console.log("My dir is:", dirname);
+
+
+//Routing
+app.get('/', (req, res)=>{  // localhost:5000/ //root route
+    // res.send("Correct response");
+    // res.send("Finished");  //Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client
+
+    // res.write("Correct response one");
+    // res.write("Correct response two");
+    // res.end("Finished"); 
+
+    // res.send("<h1>Welcome</h1><p>Thanks</p>");
+
+    res.json({msg:"Completed successfully", data:["ele", "ele2"]});
+
+    console.log("Get function");
+});
+app.get('/second',(req, res)=>{ 
+  console.log("Second get request");
+  res.status(203).send("Second get request");
+});
+app.get('/second',(req, res)=>{ 
+  console.log("This will not be executed");
+  res.status(203).send("This will not be executed");
+});
+
+app.get('/stream', async (req, res) => {
+  res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+
+  res.write('Step 1...\n');
+  await new Promise(r => setTimeout(r, 1000));
+
+  res.write('Step 2...\n');
+  await new Promise(r => setTimeout(r, 1000));
+
+  res.end('Done!\n');
+});
+
+app.get('/:id', (req, res)=>{ 
+  console.log("Third Method");
+  res.status(200).send("Third Method");
+});
+
+app.get("/html/output",(req,res)=>{
+  // res.end("<h1>Welcome</h1><p>para1</p>");
+  // res.sendFile(path.join(dirname, 'myhtml.html'));
+  res.sendFile('C:\\Projects\\nodejsProjects\\tax-backend\\src\\myhtml.html');
+});
+
+//http://localhost:5000/Regular/456?key1=vv  v&key2=vv
+app.get('/:cat/:subcat', (req, res)=>{ 
+  const {subcat, cat } = req.params;
+  console.log("Query string data: ", req.query);
+  console.log(typeof req.params);
+  console.log(typeof req.params.cat);
+  console.log(typeof req.params.subcat);
+  console.log(typeof 656);
+  console.log("Fourth Method:::::::" + cat);
+  console.log(req.body);
+  let finalResponse = "Fourth Method." + " Category is: " +cat + ", Sub category is: " +subcat;
+  finalResponse += ", Req.body data:"+ req.body.name + "->" + req.body.mobileNumber;
+  finalResponse += ", Query string data: " + req.query.key1 + ", Key2: "+ req.query.key2;
+  res.status(200).send(finalResponse);
+});
+
+//start server
+app.listen(5000);
+
+
+===============================
+
+import express from 'express';
+const app = express();
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// PUT /users/123?verbose=true
+// Body: { "name": "Rupesh", "role": "Assistant Manager" }
+app.put('/users/:id', (req, res) => {
+  const { id } = req.params;          // route param
+  const { verbose } = req.query;      // query string
+  const { name, role } = req.body;    // request body
+
+  res.json({
+    id,
+    verbose: verbose === 'true',
+    updated: { name, role },
+  });
+});
+
+app.listen(5000, () => console.log('Listening on http://localhost:5000'));
+
+
+======
+
+# Route param + query
+curl "http://localhost:5000/users/123?verbose=true"
+
+# JSON body
+curl -X POST "http://localhost:5000/users" \
+  -H "Content-Type: application/json" \
+  -d '{"name":"Rupesh","role":"Trainer"}'
+
+# URL-encoded form
+curl -X POST "http://localhost:5000/login" \
+  -H "Content-Type: application/x-www-form-urlencoded" \
+  -d "username=rupesh&password=secret"
+
+
+
+

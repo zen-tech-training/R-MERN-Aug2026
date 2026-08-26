@@ -1,0 +1,143 @@
+.nodejs
+MongoDB
+MongoCompass 
+Vs CODE
+git
+
+===========================
+MERN 
+Login
+Authentication using JWT
+Authorization
+Some collections and their crud operations
+pagination
+interceptor
+middleware
+optimization
+testing
+
+Order Processing Application
+===========================
+React project
+CRA, Vite, Nextjs framework, etc
+CRA - Create React App - 
+JS/TS
+Vite + TS
+
+=========================
+Expressjs
+
+=========================
+
+C:\Projects\MERN\ops-mern>node --version
+v24.19.0
+C:\Projects\MERN\ops-mern>npm --version
+11.17.0
+C:\Projects\MERN\ops-mern>npm create vite@latest
+Need to install the following packages:
+create-vite@9.2.0
+Ok to proceed? (y) y
+> npx
+> create-vite
+│
+◇  Project name:
+│  ops-frontend
+│
+◇  Select a framework:
+│  React
+│
+◇  Select a variant:
+│  TypeScript
+│
+◇  Which linter to use?
+│  ESLint
+│
+◇  Install with npm and start now?
+│  Yes
+│
+◇  Scaffolding project in C:\Projects\MERN\ops-mern\ops-frontend...
+│
+◇  Installing dependencies with npm...
+
+added 152 packages, and audited 153 packages in 24s
+
+42 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+│
+◇  Starting dev server...
+
+> ops-frontend@0.0.0 dev
+> vite
+
+
+  VITE v8.2.2  ready in 436 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: use --host to expose
+  ➜  press h + enter to show help
+
+=========================
+
+Install extensions
+ES7+ React/Redux/React-Native snippets
+dsznajder
+
+
+=========================
+Implement the method { }
+
+Create a JSON Object { }
+
+
+=========================
+//src/App.tsx
+
+import { useState, useEffect } from 'react'
+import './App.css'
+import axios from 'axios';
+
+function App() {
+  const [count, setCount] = useState(0)
+  // const [data, setData] = useState(["ele1", "ele2"])
+  const [data, setData] = useState(["ele1", "ele2"])
+  // const url = "https://jsonplaceholder.typicode.com/users";
+  const url = "http://localhost:5000/users";
+  async function fetchData(){
+    console.log(" I want to fetch data from "+ url);
+    //To perform crud ops/ to access the api, we need axios library
+    const response = await axios.get(url);
+    setData(response.data)
+    console.log(response);
+  }
+
+  useEffect(()=>{
+    fetchData();
+  }, []);
+
+  return (
+    <>
+    <h1 style={{ color:"blue" }}>OPS</h1>
+    <p>  { 2 + 3 } </p>
+    {/* { data } */}
+
+    { JSON.stringify(data)}
+    </>
+  )
+}
+
+export default App
+
+
+=========================
+
+
+
+
+
+
+
+
+
+ 
