@@ -8,10 +8,16 @@ function App() {
   const [data, setData] = useState([])
   // const url = "https://jsonplaceholder.typicode.com/users";
   const url = "http://localhost:5000/users";
+  const url2 = "http://localhost:5000/create-cookie";
   async function fetchData() {
     console.log(" I want to fetch data from " + url);
     //To perform crud ops/ to access the api, we need axios library
     const response = await axios.get(url);
+    const responseWIthCookie = await axios.get(url2, { withCredentials: true });
+    // credentials: true has to be added in the backend to allow cookies to be sent from the frontend to the backend
+    //It should be added in the backend in the cors middleware
+
+
     setData(response.data)
     console.log(response);
   }

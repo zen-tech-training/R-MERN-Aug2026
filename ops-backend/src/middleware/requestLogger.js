@@ -13,10 +13,7 @@ fs.mkdirSync(logDirectory, { recursive: true });
 
 const requestLogger = (req, res, next) => {
   const logEntry = `${new Date().toISOString()} ${req.ip} ${req.method} ${req.originalUrl}\n`;
-
-
 //   fs.writeFileSync(logFile, logEntry, { flag: 'w' }); // It will override the existing content of the file with the new log entry
-
   fs.appendFile(logFile, logEntry, (error) => {
     if (error) {
       next(error); //To pass the error to the next middleware for error handling

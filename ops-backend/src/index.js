@@ -18,7 +18,8 @@ app.use(cors({
         }
 
         callback(new Error('Origin is not allowed by CORS'));
-    }
+    },
+    credentials: true 
 }));
 
 app.use(requestLogger);
@@ -85,6 +86,26 @@ app.get('/users', (req, res) => {
         }]);
 })
 
+
+// 1. Route to CREATE a cookie
+app.get('/create-cookie', (req, res) => {
+    // Syntax: res.cookie(name, value, [options])
+    res.cookie('my-cookie-1', 'active_12345', {
+        maxAge: 24 * 60 * 60 * 1000, // Expires in 24 hours (in milliseconds)
+        httpOnly: true,              // Prevents client-side JS from accessing the cookie
+        secure: false,               // Set to true if using HTTPS
+        sameSite: 'lax'              // Protects against CSRF attacks
+    });
+
+    res.cookie('my-cookie-2', 'hsghcghcghgcgecgecghvhvcgh', {
+        maxAge: 24 * 60 * 60 * 1000, // Expires in 24 hours (in milliseconds)
+        httpOnly: true,              // Prevents client-side JS from accessing the cookie
+        secure: false,               // Set to true if using HTTPS
+        sameSite: 'lax'              // Protects against CSRF attacks
+    });
+    
+    res.send('Cookie has been successfully created!');
+});
 
 app.listen(5000, () => {
     console.log("Application is running on 5000")
