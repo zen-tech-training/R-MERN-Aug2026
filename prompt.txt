@@ -1,0 +1,11 @@
+Backend requestLogger:
+
+I need to implement a file based logger that should log the requestor IP address, date and time of request, HTTP method and the requested URL.
+I need a separte a file for the requestlogger.
+Src\middleware\requestLogger.js
+And then import that file in index.js (use mjs approach).
+And then use app.use()
+
+Backend Cors:
+My backend is giving a service for the request coming from react application that is running on http://localhost:5173/
+But I have added cors policy. It should reject 5173

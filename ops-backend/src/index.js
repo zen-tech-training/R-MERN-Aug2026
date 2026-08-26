@@ -1,20 +1,27 @@
 // File: src/index.js
 import express from 'express';
 import cors from 'cors';
+import requestLogger from './middleware/requestLogger.js';
 
 const app = express();
 
 //Middleware - to intercept the request
 //Every incoming request passes through a middleware
-app.use(cors()); //Cross Origin Resource Sharing
+//Sequence matters
+const allowedOrigins = ['http://localhost:3000', 'http://localhost:3001', 'http://localhost:5173'];
 
-app.use((req, res, next) => {
-  // 1. Perform your logic here (e.g., logging, validation, authentication)
-  console.log("Middleware executed!");
+app.use(cors({
+    origin: (origin, callback) => {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+            return;
+        }
 
-  // 2. Call next() to move to the next middleware or route handler
-  next(); 
-}) 
+        callback(new Error('Origin is not allowed by CORS'));
+    }
+}));
+
+app.use(requestLogger);
 
 app.use((tom, joseph, abcPvtLtd) => {
   // 1. Perform your logic here (e.g., logging, validation, authentication)

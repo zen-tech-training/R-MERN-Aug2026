@@ -4,6 +4,9 @@
 # Environment files
 **/.env
 
+## Logs
+**/logs/
+
 # Optional: environment variants
 **/.env.*
 
