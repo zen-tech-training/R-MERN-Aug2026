@@ -4,7 +4,25 @@ import cors from 'cors';
 
 const app = express();
 
-app.use(cors());
+//Middleware - to intercept the request
+//Every incoming request passes through a middleware
+app.use(cors()); //Cross Origin Resource Sharing
+
+app.use((req, res, next) => {
+  // 1. Perform your logic here (e.g., logging, validation, authentication)
+  console.log("Middleware executed!");
+
+  // 2. Call next() to move to the next middleware or route handler
+  next(); 
+}) 
+
+app.use((tom, joseph, abcPvtLtd) => {
+  // 1. Perform your logic here (e.g., logging, validation, authentication)
+  console.log("Second Middleware executed!");
+
+  // 2. Call abcPvtLtd means next() to move to the route handler
+  abcPvtLtd(); 
+}) 
 
 app.get('/', (req, res) => {
     res.send("Hello");
@@ -59,6 +77,8 @@ app.get('/users', (req, res) => {
             }
         }]);
 })
+
+
 app.listen(5000, () => {
     console.log("Application is running on 5000")
 });
