@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import './App.css'
 import axios from 'axios';
+import Login from './components/Login';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -29,11 +30,14 @@ function App() {
   return (
     <>
       <h1 style={{ color: "blue" }}>OPS</h1>
+
+    <Login />
+    <hr></hr>
+
+
       <p>  {2 + 3} </p>
       {/* { data } */}
-
       {/* { JSON.stringify(data)} */}
-
       {
         data.map((curEle: any) => {
           return (
@@ -45,6 +49,7 @@ function App() {
           )
         })
       }
+      
     </>
   )
 }
