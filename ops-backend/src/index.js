@@ -2,6 +2,8 @@
 import express from 'express';
 import cors from 'cors';
 import requestLogger from './middleware/requestLogger.js';
+import jwt from 'jsonwebtoken';
+// const jwt = require('jsonwebtoken'); //CJS - Old approach
 
 const app = express();
 
@@ -21,6 +23,10 @@ app.use(cors({
     },
     credentials: true 
 }));
+
+// 1. Add middleware BEFORE your route definitions
+app.use(express.json());                           // For parsing application/json
+app.use(express.urlencoded({ extended: true }));  // For parsing application/x-www-form-urlencoded (HTML forms)
 
 app.use(requestLogger);
 
@@ -106,6 +112,48 @@ app.get('/create-cookie', (req, res) => {
     
     res.send('Cookie has been successfully created!');
 });
+
+// app.get - Data retrieval
+// DOB - Calculate age from DOB //app.get()
+// Need details of productId=786 // app.get()
+// app.post - Data insertion
+
+//user registraion app.post()
+//login app.post() - No need to insert any data; login(username, password) here password data is confidential.
+
+
+//
+const JWT_SECRET="your_super_secret_long_random_string_here"
+
+app.post('/login', (req, res)=>{
+    console.log(req.body);
+    if(req.body.username=="admin" && req.body.password=="admin") {
+        console.log("Login operation completed");
+        // res.send("Login is successful");
+        // Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client
+
+
+        const userPayload = {            
+            username: req.body.username,
+            role: 'admin'
+        };
+
+        // Sign the token with payload, secret, and an expiration time (e.g., 1 hour)
+        const accessToken = jwt.sign(userPayload, JWT_SECRET, { expiresIn: '1h' });
+
+        return res.status(200).json({
+            message: 'Authentication successful!',
+            token: accessToken
+        });
+    }
+    else{
+        console.log("Login operation failed");
+        // res.status(400).send("Login is failed");
+        res.status(400).json({message:"Login is failed"});
+    }
+})
+
+
 
 app.listen(5000, () => {
     console.log("Application is running on 5000")
