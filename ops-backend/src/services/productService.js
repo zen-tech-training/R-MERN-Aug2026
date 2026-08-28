@@ -5,5 +5,10 @@ function getProductData(){
     );
 }
 
+function addProduct(){
+    console.log("Product inserted")
+    return "Data inserted successfully"
+}
 
-export { getProductData };
+
+export { getProductData, addProduct };

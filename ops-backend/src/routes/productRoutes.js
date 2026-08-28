@@ -1,5 +1,5 @@
 import express from "express";
-import  {getProductData} from "../services/productService.js"; //ECMA SCript
+import  {getProductData, addProduct} from "../services/productService.js"; //ECMA SCript
 // const abc = require("../services/productService");
 
 // export const productRoute = express.Router();  //named export
@@ -19,5 +19,9 @@ productRoute.get('/product', async(req,res)=> {
     res.send(result);
 });
 
+productRoute.post('/product', async(req,res)=> {
+    const result = addProduct();
+    res.send(result);
+});
 
 export default productRoute;                      //default export

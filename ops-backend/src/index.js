@@ -41,6 +41,10 @@ app.use((tom, joseph, abcPvtLtd) => {
 }) 
 
 app.use(prodRoute);  // Redirect a request to productRoutes.js file
+//This single stmt is able to handle all CRUD for product
+
+//Implement custRoute
+
 
 app.get('/', (req, res) => {                        //root route
     res.send("Hello");
