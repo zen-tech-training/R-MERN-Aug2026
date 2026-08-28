@@ -4,6 +4,8 @@ import cors from 'cors';
 import requestLogger from './middleware/requestLogger.js';
 import jwt from 'jsonwebtoken';
 // const jwt = require('jsonwebtoken'); //CJS - Old approach
+// import { productRoute } from './routes/productRoutes.js';
+import prodRoute from './routes/productRoutes.js';             //alias
 
 const app = express();
 
@@ -38,10 +40,21 @@ app.use((tom, joseph, abcPvtLtd) => {
   abcPvtLtd(); 
 }) 
 
-app.get('/', (req, res) => {
+app.use(prodRoute);  // Redirect a request to productRoutes.js file
+
+app.get('/', (req, res) => {                        //root route
     res.send("Hello");
     console.log("Get request got a hit.....iiiiiiiiiii")
 });
+
+
+//Code will reach here  if next() is mentioned in the productRoutes.js file
+//Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client
+app.get('/product', (req, res)=>{                   //product route
+    res.send("I am from index.js handling product route")
+    //res.send("I am from index.js handling product route") ////Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client
+});
+
 app.get('/users', (req, res) => {
     res.json([
         {
@@ -92,7 +105,6 @@ app.get('/users', (req, res) => {
         }]);
 })
 
-
 // 1. Route to CREATE a cookie
 app.get('/create-cookie', (req, res) => {
     // Syntax: res.cookie(name, value, [options])
@@ -121,8 +133,6 @@ app.get('/create-cookie', (req, res) => {
 //user registraion app.post()
 //login app.post() - No need to insert any data; login(username, password) here password data is confidential.
 
-
-//
 const JWT_SECRET="your_super_secret_long_random_string_here"
 
 app.post('/login', (req, res)=>{
@@ -152,8 +162,6 @@ app.post('/login', (req, res)=>{
         res.status(400).json({message:"Login is failed"});
     }
 })
-
-
 
 app.listen(5000, () => {
     console.log("Application is running on 5000")
