@@ -9,7 +9,7 @@ async function main() {
     console.log('Connected successfully to local MongoDB');
     
     // This switches to your database and automatically creates it
-    const db = client.db('order-processing-copy');
+    const db = client.db('order-processing');
     const collection = db.collection('orders');
     
     // Inserting a document makes the database permanent

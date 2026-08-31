@@ -413,5 +413,15 @@ Database "order-processing" and collection "orders" created!
 
 C:\Projects\MERN\R-MERN-Aug2026\ops-backend\src\practise>
 
+====================================
+VS Code Extension:
+MongoDB for VS Code
+Install it
 
+Then Click on "Connect" button (White color button)
+and then enter the url as mentioned below:
+mongodb://localhost:27017
+and then press "enter" key
+
+Click on "Create Playground" button
 

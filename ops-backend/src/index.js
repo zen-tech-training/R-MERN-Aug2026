@@ -5,9 +5,14 @@ import requestLogger from './middleware/requestLogger.js';
 import jwt from 'jsonwebtoken';
 // const jwt = require('jsonwebtoken'); //CJS - Old approach
 // import { productRoute } from './routes/productRoutes.js';
-import prodRoute from './routes/productRoutes.js';             //alias
+import prodRoute from './routes/productRoutes.js';    
+import {userRoute} from './routes/userRoute.js'         //alias
+import connectDB from './config/db.js';
 
 const app = express();
+
+//Connect to Mongo Database
+connectDB();
 
 //Middleware - to intercept the request
 //Every incoming request passes through a middleware
@@ -40,6 +45,7 @@ app.use((tom, joseph, abcPvtLtd) => {
   abcPvtLtd(); 
 }) 
 
+app.use(userRoute);
 app.use(prodRoute);  // Redirect a request to productRoutes.js file
 //This single stmt is able to handle all CRUD for product
 
