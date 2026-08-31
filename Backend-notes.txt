@@ -345,5 +345,73 @@ curl -X POST "http://localhost:5000/login" \
   -d "username=rupesh&password=secret"
 
 
+===========================================================================================
+ Day 5 - Architecture 
+===========================================================================================
+React Vite TS
+Express 
+Order Processing Application
+Login form, 
+JWT Token
+
+Flow for incoming request
+index.js (middleware, route handler)-> route -> controller -> service -> model
+
+
+Steps for MongoDB Compass
+1. Welcome to MongoDB Compass
+To get started, connect to an existing server or
+Click on "+ Add new connection" button
+
+2. URI
+mongodb://localhost:27017
+Click on "Save & connect" button
+
+3.
+mongodb://localhost:27017
+
+4. 
+Create a folder manually
+C:\data\db
+
+5.
+C:\Projects\MERN\R-MERN-Aug2026\ops-backend>npm i mongoose
+
+=================
+To access mongo without cmd terminal:
+
+// File: ops-backend/src/practise/mongodb-createdb.js
+import { MongoClient } from 'mongodb';
+
+const url = 'mongodb://localhost:27017';
+const client = new MongoClient(url);
+
+async function main() {
+    await client.connect();
+    console.log('Connected successfully to local MongoDB');
+    
+    // This switches to your database and automatically creates it
+    const db = client.db('order-processing');
+    const collection = db.collection('orders');
+    
+    // Inserting a document makes the database permanent
+    await collection.insertOne({ item: "test_order", status: "created" });
+    console.log('Database "order-processing" and collection "orders" created!');
+    
+    await client.close();
+}
+
+main().catch(console.error);
+
+
+=======
+To run this file:
+
+C:\Projects\MERN\R-MERN-Aug2026\ops-backend\src\practise>node mongodb-createdb.js 
+Connected successfully to local MongoDB
+Database "order-processing" and collection "orders" created!
+
+C:\Projects\MERN\R-MERN-Aug2026\ops-backend\src\practise>
+
 
 
