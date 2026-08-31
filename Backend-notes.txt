@@ -425,3 +425,22 @@ and then press "enter" key
 
 Click on "Create Playground" button
 
+=====================================
+
+
+
+
+
+const database = "order-processing";
+const collection = 'suppliers';
+
+// The current database to use.
+use(database);
+
+// Create a new collection.
+db.createCollection(collection);
+
+
+
+
+

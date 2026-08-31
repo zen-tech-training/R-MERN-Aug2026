@@ -3,7 +3,7 @@ import '../config/config.js'
 
 const connectDB = async () => {
     try {
-        await mongoose.connect('mongodb://localhost:27017', {
+        await mongoose.connect('mongodb://localhost:27017/order-processing', {
         })
         console.log("MongoDB is connected successfully");
     }

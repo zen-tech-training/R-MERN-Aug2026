@@ -6,7 +6,8 @@ import jwt from 'jsonwebtoken';
 // const jwt = require('jsonwebtoken'); //CJS - Old approach
 // import { productRoute } from './routes/productRoutes.js';
 import prodRoute from './routes/productRoutes.js';    
-import {userRoute} from './routes/userRoute.js'         //alias
+import userRoute from './routes/userRoute.js'         //alias
+import supplierRoute from './routes/supplierRoute.js';
 import connectDB from './config/db.js';
 
 const app = express();
@@ -46,6 +47,8 @@ app.use((tom, joseph, abcPvtLtd) => {
 }) 
 
 app.use(userRoute);
+app.use('/users', userRoute)
+app.use('/suppliers', supplierRoute);
 app.use(prodRoute);  // Redirect a request to productRoutes.js file
 //This single stmt is able to handle all CRUD for product
 

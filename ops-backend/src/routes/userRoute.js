@@ -4,3 +4,5 @@ const userRoute = express.Router();
 
 userRoute.get('/', getUsers);
 
+export default userRoute;
+
