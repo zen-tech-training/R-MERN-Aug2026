@@ -48,7 +48,7 @@ app.use((tom, joseph, abcPvtLtd) => {
 
 app.use(userRoute);
 app.use('/users', userRoute)
-app.use('/suppliers', supplierRoute);
+app.use('/api/suppliers', supplierRoute); //Responsible to redirect CRUD request 
 app.use(prodRoute);  // Redirect a request to productRoutes.js file
 //This single stmt is able to handle all CRUD for product
 

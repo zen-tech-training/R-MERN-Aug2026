@@ -43,8 +43,8 @@ function App() {
           return (
             <div style={{ height:"250px", width:"250px", border:"1px red solid"}} key={curEle.id}>
               <h1> {curEle.name} </h1>
-              <div> {curEle.address.street}  {curEle.address.zipcode} </div>
-              <h6> {curEle.company.name} </h6>
+              {/* <div> {curEle.address.street}  {curEle.address.zipcode} </div>
+              <h6> {curEle.company.name} </h6> */}
             </div>
           )
         })
