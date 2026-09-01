@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import './App.css'
 import axios from 'axios';
 import Login from './components/Login';
+import Supplier from './components/Supplier';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -30,7 +31,8 @@ function App() {
   return (
     <>
       <h1 style={{ color: "blue" }}>OPS</h1>
-
+      <Supplier />
+      
     <Login />
     <hr></hr>
 

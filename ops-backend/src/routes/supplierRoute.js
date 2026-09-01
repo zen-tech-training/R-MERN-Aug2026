@@ -5,6 +5,6 @@ const supplierRoute = express.Router();
 
 supplierRoute.get('/', getSuppliers);
 supplierRoute.post('/', insertSupplier);
-supplierRoute.delete("/:name", removeSupplierByName);  //Request parameter
+supplierRoute.delete("/:name", removeSupplierByName);  //Request route parameter
 
 export default supplierRoute;
