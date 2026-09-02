@@ -9,3 +9,22 @@ And then use app.use()
 Backend Cors:
 My backend is giving a service for the request coming from react application that is running on http://localhost:5173/
 But I have added cors policy. It should reject 5173
+
+
+
+==================
+Frontend propmpt for Route and Navbar
+
+I have created React Project using Vite + TS
+Project title is "Order-Processing-Solution" i.e. ops
+My backend is already ready using node and express.
+I am using MERN Stack.
+
+
+Now, I need to implement a Navbar component and Routing.
+There I need few menu like Product, Supplier, Customer, Login/Logout, Profile, etc
+I need to install material UI and I need to use the same in all components.
+Please implement routing and Navbar.
+
+====================
+
