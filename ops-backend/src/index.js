@@ -47,7 +47,7 @@ app.use((tom, joseph, abcPvtLtd) => {
 }) 
 
 app.use(userRoute);
-app.use('/users', userRoute)
+app.use('/api/users', userRoute)
 app.use('/api/suppliers', supplierRoute); //Responsible to redirect CRUD request 
 app.use(prodRoute);  // Redirect a request to productRoutes.js file
 //This single stmt is able to handle all CRUD for product
@@ -148,7 +148,7 @@ app.get('/create-cookie', (req, res) => {
 
 const JWT_SECRET="your_super_secret_long_random_string_here"
 
-app.post('/login', (req, res)=>{
+app.post('/api/login', (req, res)=>{
     console.log(req.body);
     if(req.body.username=="admin" && req.body.password=="admin") {
         console.log("Login operation completed");
