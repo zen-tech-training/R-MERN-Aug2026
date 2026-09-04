@@ -1,5 +1,5 @@
 // Filepath: src/controllers/supplierController.js
-import { getAllSuppliers, addSupplier, deleteSupplierByName } from '../services/supplierService.js'
+import { getAllSuppliers, addSupplier, modifySupplier, deleteSupplierByName } from '../services/supplierService.js'
 
 const getSuppliers = async (req, res) => {
     try {
@@ -17,9 +17,22 @@ const insertSupplier = async(req, res) =>{
         // const supplier = await addSupplier();
         console.log(req.body);
         const supplier = await addSupplier(req.body.name, req.body.address);
-        console.log("I am in supplierController");
+        // console.log("I am in supplierController");
         console.log(supplier);
         res.status(201).json(supplier);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
+
+const updateSupplier = async(req, res) =>{
+    try {
+        console.log(req.body);
+        const supplier = await modifySupplier(req.body.name, req.body.address);
+        // console.log("I am in supplierController");
+        console.log(supplier);
+        res.status(201).json(supplier); //WIP
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -39,7 +52,7 @@ const removeSupplierByName = async(req, res) =>{
         res.status(500).json({ message: error.message });
     }
 }
-export { getSuppliers, insertSupplier, removeSupplierByName };
+export { getSuppliers, insertSupplier, updateSupplier, removeSupplierByName };
 
 
 //To pass the data from the fron-end application
