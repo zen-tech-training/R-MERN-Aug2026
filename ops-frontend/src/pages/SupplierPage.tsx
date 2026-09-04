@@ -1,8 +1,8 @@
 //Filepath: src/pages/SupplierPage.tsx
-import { Container, Typography, CircularProgress, Alert } from "@mui/material";
+import { Container, Typography, CircularProgress, Alert, Button } from "@mui/material";
 import { useEffect, useState } from "react";
 import SupplierList from "../components/suppliers/SupplierList";
-import { getSuppliers, deleteSupplier } from "../api/supplierService";
+import { getSuppliers, addSupplier, deleteSupplier } from "../api/supplierService";
 import type { Supplier } from "../types/Supplier";
 
 const SupplierPage = () => {
@@ -26,15 +26,30 @@ const SupplierPage = () => {
     }, []);
 
     const handleDelete = async (name: string) => {
-            try {
-                await deleteSupplier(name); //axios.delete()                
-                setSuppliers(prev => prev.filter(x => x.name !== name)); //axios.get()
-                // setCounter(prevvvv => preevv-1)
-                // setCounter(preevv-1)
-            } catch {
-                alert("Delete Failed");
-            }
-        };
+        try {
+            await deleteSupplier(name); //axios.delete()                
+            setSuppliers(prev => prev.filter(x => x.name !== name)); //axios.get()
+            // setCounter(prevvvv => preevv-1)
+            // setCounter(preevv-1)
+        } catch {
+            alert("Delete Failed");
+        }
+    };
+
+    // const handleAdd = async() =>{
+    //     alert("I am adding new supplier");
+    // }
+    // const handleAdd = async(name:string, address:string) =>{
+    //     alert("I am adding new supplier" + name + ", " + address);
+    // }
+    const handleAdd = async() => {
+        try{
+            await addSupplier({"name":"S14", "address":"Patna"});
+        }
+        finally{
+
+        }
+    }
 
     if (loading) {
         return <CircularProgress />;
@@ -55,10 +70,26 @@ const SupplierPage = () => {
                 </Alert>
             }
 
+            <Button
+                variant="contained"
+                color="primary"
+                // startIcon={ />}
+                // onClick={() => ( alert("Button Clicked!!!!!!!!")) }
+                // onClick={()=>alert("Button Clicked!!!!!!!!") }
+                // onClick={()=>console.log("abc")}
+                // onClick={ handleAdd }
+                // onClick={ handleAdd("Tom", "Kerala") } //Auto called beacuse of parameter
+                // onClick={ ()=> handleAdd("Tom", "Kerala") } //Auto called beacuse of parameter
+                onClick = { handleAdd }
+            >
+                Add Supplier
+            </Button>
+
             <SupplierList
                 suppliers={suppliers}
                 onDelete={handleDelete}
             />
+
 
         </Container>
     );

@@ -1,10 +1,14 @@
 //Filepath: src/types/Supplier.ts
 export interface Supplier {
-    _id: string;
+    _id ?: string;
     name: string;
     address: string;
 }
 
+export interface NewSupplier {
+    name: string;
+    address: string;
+}
 
 //OOPS - Interface - To achieve the multiple inheritance 
 // interface PaymentMethod{
