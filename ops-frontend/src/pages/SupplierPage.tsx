@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import SupplierList from "../components/suppliers/SupplierList";
 import { getSuppliers, addSupplier, deleteSupplier } from "../api/supplierService";
 import type { Supplier } from "../types/Supplier";
+import { Link } from "react-router-dom";
 
 const SupplierPage = () => {
     const [suppliers, setSuppliers] = useState<Supplier[]>([]);
@@ -42,13 +43,16 @@ const SupplierPage = () => {
     // const handleAdd = async(name:string, address:string) =>{
     //     alert("I am adding new supplier" + name + ", " + address);
     // }
-    const handleAdd = async() => {
-        try{
-            await addSupplier({"name":"S14", "address":"Patna"});
-        }
-        finally{
+    // const handleAdd = async() => {
+        // try{
+        //     await addSupplier({"name":"S14", "address":"Patna"});
+        // }
+        // finally{
 
-        }
+        // }
+    // }
+    const handleAdd = async() => {
+
     }
 
     if (loading) {
@@ -80,7 +84,10 @@ const SupplierPage = () => {
                 // onClick={ handleAdd }
                 // onClick={ handleAdd("Tom", "Kerala") } //Auto called beacuse of parameter
                 // onClick={ ()=> handleAdd("Tom", "Kerala") } //Auto called beacuse of parameter
-                onClick = { handleAdd }
+                // onClick = { handleAdd }
+
+                component={Link}
+                to="/register-supplier"
             >
                 Add Supplier
             </Button>

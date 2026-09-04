@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom"; //In Next.js rrd package is no
 import Dashboard from "../pages/Dashboard";
 import Products from "../pages/Products";
 import SupplierPage from "../pages/SupplierPage";
+import SupplierRegistrationPage from "../pages/SupplierRegistrationPage";
 import Customers from "../pages/Customers";
 import Profile from "../pages/Profile";
 import LoginPage from "../pages/LoginPage";
@@ -21,10 +22,8 @@ const AppRoutes = () => {
         element={<Products />}
       />
 
-      <Route
-        path="/suppliers"
-        element={<SupplierPage />}
-      />
+      <Route path="/suppliers" element={<SupplierPage />} />
+      <Route path="/register-supplier" element={<SupplierRegistrationPage />} />
 
       <Route
         path="/customers"

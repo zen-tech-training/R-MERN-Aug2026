@@ -5,11 +5,6 @@ export interface Supplier {
     address: string;
 }
 
-export interface NewSupplier {
-    name: string;
-    address: string;
-}
-
 //OOPS - Interface - To achieve the multiple inheritance 
 // interface PaymentMethod{
 // }
