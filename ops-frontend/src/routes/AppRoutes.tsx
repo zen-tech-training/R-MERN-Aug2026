@@ -7,6 +7,7 @@ import SupplierRegistrationPage from "../pages/SupplierRegistrationPage";
 import Customers from "../pages/Customers";
 import Profile from "../pages/Profile";
 import LoginPage from "../pages/LoginPage";
+import AddOperation from "../practise/AddOperation"
 
 const AppRoutes = () => {
   return (
@@ -24,6 +25,7 @@ const AppRoutes = () => {
 
       <Route path="/suppliers" element={<SupplierPage />} />
       <Route path="/register-supplier" element={<SupplierRegistrationPage />} />
+      <Route path="/practise-add-operation" element={<AddOperation />} />
 
       <Route
         path="/customers"
