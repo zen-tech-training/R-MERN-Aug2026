@@ -8,18 +8,21 @@ import { addSupplier } from "../api/supplierService";
 import type { Supplier } from "../types/Supplier";
 
 const SupplierRegistrationPage = () => {
-    const [supplier, setSupplier] = useState<Supplier>({ name: "S16", address: "" });
+    const [supplier, setSupplier] = useState<Supplier>({ name: "", address: "" });
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState("");
-    const [successMessage, setSuccessMessage] = useState("");
+    const [error, setError] = useState("ghgh");
+    const [successMessage, setSuccessMessage] = useState("sssssss");
 
     const [supplierFormErrors, setSupplierFormErrors] = useState<Supplier>({
-        name: "Pls enter valid sname.......................",
+        name: "",
         address: ""
     });
 
     // 2. Generic change handler to update specific keys in the state object
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+        // setError("");                   //Not recommended
+        // setSuccessMessage("");          //Not recommended
+
         validateInput(e);
         const { name, value } = e.target;
         setSupplier((prev) => ({
@@ -31,28 +34,35 @@ const SupplierRegistrationPage = () => {
 
     const validateInput = (e: ChangeEvent<HTMLInputElement>) => {
         console.log("I am in Vaildation function: ", e.target.name, e.target.value);
-        const { name, value } = e.target;
-        if (e.target.name == "address") {            
-            if (e.target.value === "d") {
-                console.log("I am in if");
-                setSupplierFormErrors({
-                    ...supplierFormErrors,
-                    address: ""
-                })
-            }
-            else if(e.target.value === "de")
-            {
-                console.log("I am in else");
-                setSupplierFormErrors({
-                    ...supplierFormErrors,
-                    address: "Pls enter valid s address"
-                })
+        // const { name, value } = e.target;
+        const supplierNameRegex = /^[a-zA-Z0-9\s&'.,()-]{2,100}$/;
+
+        console.log("The returned value of regEx.test(): ", supplierNameRegex.test(e.target.value));
+
+        switch (e.target.name) {
+            case "name":
+                console.log("I am in name validation");
+                if (supplierNameRegex.test(e.target.value)) //regex [^A-Za-z]
+                    setSupplierFormErrors({ ...supplierFormErrors, name: "" })
+                else
+                    setSupplierFormErrors({ ...supplierFormErrors, name: "Please enter valid name" })
+                break;
+
+            case "address": {
+                console.log("I am in address validation");
+                if (supplierNameRegex.test(e.target.value)) //regex [^A-Za-z]
+                    setSupplierFormErrors({ ...supplierFormErrors, address: "" })
+                else
+                    setSupplierFormErrors({ ...supplierFormErrors, address: "Please enter valid address" })
+                break;
             }
         }
-    };
+    }
 
     const registerSupplier = async (eve: SubmitEvent) => {
         eve.preventDefault();      // To stop the default submission behaviour/ Refresh Browser
+        setError("");
+        setSuccessMessage("");
         try {
             setLoading(true);
             const response = await addSupplier(supplier); //axios.post()
@@ -60,9 +70,14 @@ const SupplierRegistrationPage = () => {
             // setSupplier(response.data);
             setSuccessMessage("Supplier is added successfully");
         } catch (err) {
-            setError("Failed to load suppliers");
+            setError("Failed to add supplier");
         } finally {
             setLoading(false);
+
+            setTimeout(() => {
+                setError("");
+                setSuccessMessage("");
+            }, 2000);
         }
     };
 
@@ -104,7 +119,7 @@ const SupplierRegistrationPage = () => {
 
                 {supplierFormErrors.name &&
                     <Alert severity="error">
-                        AAAAAA - {supplierFormErrors.name}
+                        {supplierFormErrors.name}
                     </Alert>
                 }
 
