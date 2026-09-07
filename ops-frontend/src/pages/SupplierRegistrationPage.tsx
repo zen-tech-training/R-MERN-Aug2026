@@ -9,9 +9,10 @@ import type { Supplier } from "../types/Supplier";
 
 const SupplierRegistrationPage = () => {
     const [supplier, setSupplier] = useState<Supplier>({ name: "", address: "" });
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState("ghgh");
-    const [successMessage, setSuccessMessage] = useState("sssssss");
+    // const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
+    const [successMessage, setSuccessMessage] = useState("");
+    const [isActive, setIsActive] = useState(false);
 
     const [supplierFormErrors, setSupplierFormErrors] = useState<Supplier>({
         name: "",
@@ -32,31 +33,62 @@ const SupplierRegistrationPage = () => {
     };
 
 
+    // let isFormValid : any = "true";
     const validateInput = (e: ChangeEvent<HTMLInputElement>) => {
         console.log("I am in Vaildation function: ", e.target.name, e.target.value);
+
+        const newSupplierFormErrors = {...supplierFormErrors}           //Best practise
+
         // const { name, value } = e.target;
         const supplierNameRegex = /^[a-zA-Z0-9\s&'.,()-]{2,100}$/;
 
         console.log("The returned value of regEx.test(): ", supplierNameRegex.test(e.target.value));
 
+        setIsActive(false);
         switch (e.target.name) {
             case "name":
                 console.log("I am in name validation");
-                if (supplierNameRegex.test(e.target.value)) //regex [^A-Za-z]
-                    setSupplierFormErrors({ ...supplierFormErrors, name: "" })
-                else
-                    setSupplierFormErrors({ ...supplierFormErrors, name: "Please enter valid name" })
+                if (supplierNameRegex.test(e.target.value)){ //regex [^A-Za-z]
+                    // setSupplierFormErrors({ ...supplierFormErrors, name: "" })
+                    // setIsActive(true);
+                    newSupplierFormErrors.name = "";
+                }
+                else{
+                    // setSupplierFormErrors({ ...supplierFormErrors, name: "Please enter valid name" })
+                    // setIsActive(false);
+                    newSupplierFormErrors.name = "Please enter valid name";
+                }
                 break;
 
             case "address": {
                 console.log("I am in address validation");
-                if (supplierNameRegex.test(e.target.value)) //regex [^A-Za-z]
-                    setSupplierFormErrors({ ...supplierFormErrors, address: "" })
-                else
-                    setSupplierFormErrors({ ...supplierFormErrors, address: "Please enter valid address" })
+                if (supplierNameRegex.test(e.target.value)) { //regex [^A-Za-z]
+                    // setSupplierFormErrors({ ...supplierFormErrors, address: "" })
+                    // setIsActive(true);
+                    newSupplierFormErrors.address = "";
+                }
+                else{
+                    // setSupplierFormErrors({ ...supplierFormErrors, address: "Please enter valid address" })
+                    // setIsActive(false);
+                    newSupplierFormErrors.address = "Please enter valid address";
+                }
                 break;
             }
         }
+        
+        // let isFormValid : any= supplier.name && supplier.address &&  supplierFormErrors.name =="" && supplierFormErrors.address=="" 
+        // // isFormValid = "false";
+        // setIsActive(isFormValid); 
+        //It creates a copy of a main state variable, it means it alloactes a separate memory
+        //Modification happens inside the newly allocated memory, and then
+        //The reference of newly memory is given to the existing state variable.
+        //This process takes some time
+
+        setSupplierFormErrors(newSupplierFormErrors);
+        let isFormValid : any= supplier.name && supplier.address &&  newSupplierFormErrors.name =="" && newSupplierFormErrors.address=="" 
+        setIsActive(isFormValid); 
+        
+        console.log(isFormValid);
     }
 
     const registerSupplier = async (eve: SubmitEvent) => {
@@ -64,7 +96,7 @@ const SupplierRegistrationPage = () => {
         setError("");
         setSuccessMessage("");
         try {
-            setLoading(true);
+            // setLoading(true);
             const response = await addSupplier(supplier); //axios.post()
             console.log(response);
             // setSupplier(response.data);
@@ -72,7 +104,7 @@ const SupplierRegistrationPage = () => {
         } catch (err) {
             setError("Failed to add supplier");
         } finally {
-            setLoading(false);
+            // setLoading(false);
 
             setTimeout(() => {
                 setError("");
@@ -114,7 +146,7 @@ const SupplierRegistrationPage = () => {
                     onChange={handleChange}
                     fullWidth
                     required
-                    disabled={loading}
+                    // disabled={loading}
                 />
 
                 {supplierFormErrors.name &&
@@ -133,7 +165,7 @@ const SupplierRegistrationPage = () => {
                     required
                     multiline
                     rows={3} // Better user experience for typing physical addresses
-                    disabled={loading}
+                    // disabled={loading}
                 />
 
 
@@ -146,11 +178,11 @@ const SupplierRegistrationPage = () => {
                     type="submit" // Triggers the onSubmit of the form box
                     variant="contained"
                     color="primary"
-                    disabled={loading}
+                    disabled={!isActive}   // disabled = {true}                    
                     size="large"
                     sx={{ alignSelf: 'flex-start', minWidth: 120 }}
                 >
-                    {loading ? <CircularProgress size={24} color="inherit" /> : "Save"}
+                    Save
                 </Button>
             </Box>
 
@@ -169,6 +201,7 @@ const SupplierRegistrationPage = () => {
             {"HHHHHH"} {2 * 3}
             {error} - {[2, " , SecondElement-Angular, ", 3]}
 
+            {/* <p>Latest isFormValid value : { isFormValid} </p> */}
 
         </Container>
     );
