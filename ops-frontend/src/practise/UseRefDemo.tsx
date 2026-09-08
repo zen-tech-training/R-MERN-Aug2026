@@ -30,35 +30,111 @@
 
 //====================================== ClickCounterDemo using useRef =======================
 
+// import React, { useState, useRef } from 'react';
+
+// function UseRefDemo() {
+//   const [renderCount, setRenderCount] = useState(0);
+//   // This value persists, but changing it won't trigger a re-render
+//   const totalClicksRef = useRef(0);
+
+//   const handleSilentClick = () => {
+//     totalClicksRef.current += 1;
+//     console.log(`Clicks stored in ref (silent): ${totalClicksRef.current}`);
+//   };
+
+//   return (
+//     <div style={{ padding: '20px', border: '1px solid #ccc', marginTop: '20px' }}>
+//       <h3>Silent Value Demo</h3>
+//       <p>Component Render Count: <strong>{renderCount}</strong></p>
+      
+//       {/* Clicking this increases the ref, but the screen won't update until you trigger a render */}
+//       <button onClick={handleSilentClick}>
+//         Click Silently (Updates Ref)
+//       </button>
+
+//       {/* Clicking this forces a state change, which re-renders the page and shows the updated ref */}
+//       <button onClick={() => setRenderCount(renderCount + 1)} style={{ marginLeft: '10px' }}>
+//         Force Re-render to see Ref: ({totalClicksRef.current})
+//       </button>
+//     </div>
+//   );
+// }
+
+// export default UseRefDemo;
+
+
+
+
+//====================================== stop watch demo using useRef =======================
 import React, { useState, useRef } from 'react';
 
 function UseRefDemo() {
-  const [renderCount, setRenderCount] = useState(0);
-  // This value persists, but changing it won't trigger a re-render
-  const totalClicksRef = useRef(0);
+  const [time, setTime] = useState(0);
+  const [isRunning, setIsRunning] = useState(false);
+  
+  // This ref stores the interval ID safely across renders without causing re-renders
+  const timerRef = useRef(null);
 
-  const handleSilentClick = () => {
-    totalClicksRef.current += 1;
-    console.log(`Clicks stored in ref (silent): ${totalClicksRef.current}`);
+  const startTimer = () => {
+    if (isRunning) return;    
+    console.log("Starting timer...");
+    
+    setIsRunning(true);
+    // Store the interval ID directly into the ref's .current property
+    timerRef.current = setInterval(() => {
+      setTime((prevTime) => prevTime + 10); // State will be updated every 10 milliseconds
+    }, 10);
+  };
+
+  const pauseTimer = () => {
+    setIsRunning(false);
+    // Access the stored interval ID from the ref to clear it
+    clearInterval(timerRef.current);
+  };
+
+  const resetTimer = () => {
+    setIsRunning(false);
+    clearInterval(timerRef.current);
+    setTime(0);
+  };
+
+  // Format milliseconds into MM:SS:CC (Minutes:Seconds:Centiseconds)
+  const formatTime = (totalMilliseconds) => {
+    const minutes = Math.floor(totalMilliseconds / 60000);
+    const seconds = Math.floor((totalMilliseconds % 60000) / 1000);
+    const centiseconds = Math.floor((totalMilliseconds % 1000) / 10);
+
+    return `${minutes.toString().padStart(2, '0')}:${seconds
+      .toString()
+      .padStart(2, '0')}.${centiseconds.toString().padStart(2, '0')}`;
   };
 
   return (
-    <div style={{ padding: '20px', border: '1px solid #ccc', marginTop: '20px' }}>
-      <h3>Silent Value Demo</h3>
-      <p>Component Render Count: <strong>{renderCount}</strong></p>
-      
-      {/* Clicking this increases the ref, but the screen won't update until you trigger a render */}
-      <button onClick={handleSilentClick}>
-        Click Silently (Updates Ref)
-      </button>
+    <div style={{ textAlign: 'center', padding: '20px', fontFamily: 'monospace' }}>
+      <h2>React Stopwatch</h2>
+      <div style={{ fontSize: '3rem', marginBottom: '20px' }}>
+        {formatTime(time)} ----- UnFormatted: {time}
+      </div>
+      <div>
+        {/* <button onClick={startTimer} style={buttonStyle}>Starteeeeeee</button> */}
 
-      {/* Clicking this forces a state change, which re-renders the page and shows the updated ref */}
-      <button onClick={() => setRenderCount(renderCount + 1)} style={{ marginLeft: '10px' }}>
-        Force Re-render to see Ref: ({totalClicksRef.current})
-      </button>
+        {!isRunning ? (
+          <button onClick={startTimer} style={buttonStyle}>Start</button>
+        ) : (
+          <button onClick={pauseTimer} style={buttonStyle}>Pause</button>
+        )}
+        <button onClick={resetTimer} style={{ ...buttonStyle, marginLeft: '10px' }}>Reset</button>
+      </div>
     </div>
   );
 }
 
+const buttonStyle = {
+  padding: '10px 20px',
+  fontSize: '1rem',
+  cursor: 'pointer',
+};
+
 export default UseRefDemo;
+
 
