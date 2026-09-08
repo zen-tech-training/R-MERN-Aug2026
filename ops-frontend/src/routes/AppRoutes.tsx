@@ -8,6 +8,8 @@ import Customers from "../pages/Customers";
 import Profile from "../pages/Profile";
 import LoginPage from "../pages/LoginPage";
 import AddOperation from "../practise/AddOperation"
+import UseEffectDemo from "../practise/UseEffectDemo";
+import ParentComponent from "../practise/ParentComponent";
 
 const AppRoutes = () => {
   return (
@@ -18,14 +20,15 @@ const AppRoutes = () => {
       {/* Root route */}
       <Route path="/" element={<Dashboard />} />
 
-      <Route
-        path="/products"
-        element={<Products />}
-      />
+      <Route path="/products" element={<Products />} />
 
       <Route path="/suppliers" element={<SupplierPage />} />
       <Route path="/register-supplier" element={<SupplierRegistrationPage />} />
       <Route path="/practise-add-operation" element={<AddOperation />} />
+
+      <Route path="/use-effect-demo" element={<UseEffectDemo />} />
+      <Route path="/parent-component" element={<ParentComponent />} />
+      
 
       <Route
         path="/customers"

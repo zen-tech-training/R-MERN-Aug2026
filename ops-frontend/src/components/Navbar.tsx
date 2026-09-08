@@ -47,10 +47,7 @@ const Navbar = () => {
     };
 
     const menuItems = [
-        {
-            text: "Products",
-            path: "/products"
-        },
+        { text: "Products", path: "/products" },
         {
             text: "Suppliers",
             path: "/suppliers"
@@ -59,6 +56,8 @@ const Navbar = () => {
             text: "Customers",
             path: "/customers"
         },
+        { text: "UseEffectDemo", path: "/use-effect-demo" },
+        { text: "Parent-Child Communication", path:"parent-component"},
         {
             text: "Profile",
             path: "/profile"
