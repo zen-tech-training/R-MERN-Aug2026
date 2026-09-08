@@ -75,6 +75,8 @@ function UseRefDemo() {
   // This ref stores the interval ID safely across renders without causing re-renders
   const timerRef = useRef(null);
 
+  // let intervalId; //No preservation across renders, will be lost on re-render and cause memory leaks
+
   const startTimer = () => {
     if (isRunning) return;    
     console.log("Starting timer...");
@@ -84,17 +86,22 @@ function UseRefDemo() {
     timerRef.current = setInterval(() => {
       setTime((prevTime) => prevTime + 10); // State will be updated every 10 milliseconds
     }, 10);
+    // intervalId = setInterval(() => {
+    //   setTime((prevTime) => prevTime + 10); // State will be updated every 10 milliseconds
+    // }, 10);
   };
 
   const pauseTimer = () => {
     setIsRunning(false);
     // Access the stored interval ID from the ref to clear it
     clearInterval(timerRef.current);
+    // clearInterval(intervalId);
   };
 
   const resetTimer = () => {
     setIsRunning(false);
     clearInterval(timerRef.current);
+    // clearInterval(intervalId);
     setTime(0);
   };
 
@@ -137,4 +144,17 @@ const buttonStyle = {
 
 export default UseRefDemo;
 
+/*
+Explanation:
+Why useRef is mandatory here:
 
+1. Preservation: When the timer runs, setTime updates the screen 100 times a second. 
+This forces the function component to re-execute completely.
+Because timerRef is a ref, React remembers the original interval ID perfectly across all those hundreds of redraws.
+ 
+
+2. No Memory Leaks: 
+If you don't use a ref to track the interval ID, you lose the reference to the running interval. 
+This means clicking "Pause" won't know which interval to clear, 
+causing the timer to run forever in the background and crash your application's performance.
+*/
