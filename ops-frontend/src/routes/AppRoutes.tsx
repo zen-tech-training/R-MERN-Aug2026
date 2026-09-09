@@ -12,6 +12,8 @@ import UseEffectDemo from "../practise/UseEffectDemo";
 import ParentComponent from "../practise/ParentComponent";
 import UseRefDemo from "../practise/UseRefDemo";
 import UseMemoDemo from "../practise/UseMemoDemo";
+import { Counter } from "../components/Counter";
+import { DisplayReduxStore } from "../components/DisplayReduxStore";
 
 const AppRoutes = () => {
   return (
@@ -32,6 +34,8 @@ const AppRoutes = () => {
       <Route path="/parent-component" element={<ParentComponent />} />
       <Route path="/use-ref-demo" element={<UseRefDemo />} />
       <Route path="/use-memo-demo" element={<UseMemoDemo />} />
+      <Route path="/counter-redux-demo" element={<Counter />} />
+      <Route path="/display-redux-store" element={<DisplayReduxStore />} />
       
 
       <Route

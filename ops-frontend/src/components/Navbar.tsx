@@ -60,6 +60,9 @@ const Navbar = () => {
         { text: "Parent-Child Communication", path:"parent-component"},
         { text: "useRef Demo", path:"use-ref-demo"},
         { text: "useMemo Demo", path:"use-memo-demo"},
+        { text: "Counter Redux Demo", path:"counter-redux-demo"},
+        { text: "View Redux Store", path:"display-redux-store"},
+        
         {
             text: "Profile",
             path: "/profile"
