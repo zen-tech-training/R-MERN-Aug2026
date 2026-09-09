@@ -14,11 +14,16 @@ const UseEffectDemo = () => {
 
   useEffect(() => {
     console.log("UE Type 2. Runs only on the first render")
+    //It is executed only once when the component is mounted. It is used to fetch data from API, set up subscriptions, or perform any other side effects that should only happen once.
+    //Get bulky Data from API Call - [500 elements] ----> Apply filtering --> [10/500]
   }, []);
 
   useEffect(() => {
     console.log("UE Type 3. Runs on the first render And any time any dependency value changes")
   }, [count]);
+  // Admin/ Superuser - supplierName, Product, QTY, PlaceOrderButton -->
+  // Calculated (PlaceOrderButton(Pay Rs.3,28,450))
+  // Dependency array: [supplierName, Product, QTY]
 
   const incrementCount = () => {
     //count++   Vs    count + 1

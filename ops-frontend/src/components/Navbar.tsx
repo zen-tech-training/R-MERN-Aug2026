@@ -59,6 +59,7 @@ const Navbar = () => {
         { text: "useEffect Demo", path: "/use-effect-demo" },
         { text: "Parent-Child Communication", path:"parent-component"},
         { text: "useRef Demo", path:"use-ref-demo"},
+        { text: "useMemo Demo", path:"use-memo-demo"},
         {
             text: "Profile",
             path: "/profile"

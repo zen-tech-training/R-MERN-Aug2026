@@ -11,6 +11,7 @@ import AddOperation from "../practise/AddOperation"
 import UseEffectDemo from "../practise/UseEffectDemo";
 import ParentComponent from "../practise/ParentComponent";
 import UseRefDemo from "../practise/UseRefDemo";
+import UseMemoDemo from "../practise/UseMemoDemo";
 
 const AppRoutes = () => {
   return (
@@ -30,6 +31,7 @@ const AppRoutes = () => {
       <Route path="/use-effect-demo" element={<UseEffectDemo />} />
       <Route path="/parent-component" element={<ParentComponent />} />
       <Route path="/use-ref-demo" element={<UseRefDemo />} />
+      <Route path="/use-memo-demo" element={<UseMemoDemo />} />
       
 
       <Route
