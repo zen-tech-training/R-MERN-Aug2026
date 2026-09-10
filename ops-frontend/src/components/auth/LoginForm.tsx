@@ -15,7 +15,8 @@ const LoginForm = ({ onLogin }: Props) => {
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
-        setLoginData(prev => ({...prev, value}));
+        // setLoginData(prev => ({...prev, value}));
+        setLoginData(prev => ({ ...prev, [name]: value }));
     };
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {

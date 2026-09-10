@@ -14,6 +14,7 @@ import UseRefDemo from "../practise/UseRefDemo";
 import UseMemoDemo from "../practise/UseMemoDemo";
 import { Counter } from "../components/Counter";
 import { DisplayReduxStore } from "../components/DisplayReduxStore";
+import { ThemeSwitcher } from "../components/ThemeSwitcher";
 
 const AppRoutes = () => {
   return (
@@ -36,6 +37,7 @@ const AppRoutes = () => {
       <Route path="/use-memo-demo" element={<UseMemoDemo />} />
       <Route path="/counter-redux-demo" element={<Counter />} />
       <Route path="/display-redux-store" element={<DisplayReduxStore />} />
+      <Route path="/Theme-Switcher-redux-demo" element={<ThemeSwitcher />} />
       
 
       <Route

@@ -166,7 +166,10 @@ app.post('/api/login', (req, res)=>{
 
         return res.status(200).json({
             message: 'Authentication successful!',
-            token: accessToken
+            token: accessToken,
+            userId:1,
+            username:"admin",
+            userRole:"admin"
         });
     }
     else{

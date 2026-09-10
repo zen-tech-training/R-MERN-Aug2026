@@ -52,21 +52,22 @@ const Navbar = () => {
             text: "Suppliers",
             path: "/suppliers"
         },
-        {
-            text: "Customers",
-            path: "/customers"
-        },
-        { text: "useEffect Demo", path: "/use-effect-demo" },
-        { text: "Parent-Child Communication", path:"parent-component"},
-        { text: "useRef Demo", path:"use-ref-demo"},
-        { text: "useMemo Demo", path:"use-memo-demo"},
+        // {
+        //     text: "Customers",
+        //     path: "/customers"
+        // },
+        // { text: "useEffect Demo", path: "/use-effect-demo" },
+        // { text: "Parent-Child Communication", path:"parent-component"},
+        // { text: "useRef Demo", path:"use-ref-demo"},
+        // { text: "useMemo Demo", path:"use-memo-demo"},
         { text: "Counter Redux Demo", path:"counter-redux-demo"},
+        { text: "Theme Switcher Redux Demo", path:"Theme-Switcher-redux-demo"},
         { text: "View Redux Store", path:"display-redux-store"},
         
-        {
-            text: "Profile",
-            path: "/profile"
-        }
+        // {
+        //     text: "Profile",
+        //     path: "/profile"
+        // }
     ];
 
     return (
