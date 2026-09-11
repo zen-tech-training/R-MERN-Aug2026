@@ -21,10 +21,10 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { useState } from "react";
 
-import {
-    clearToken,
-    isAuthenticated
-} from "../utils/auth";
+import { clearToken, isAuthenticated } from "../utils/auth";
+import { useDispatch, useSelector } from "react-redux";
+import type { AppDispatch, RootState } from '../store';
+import { logout } from '../features/authSlice';
 
 const Navbar = () => {
 
@@ -36,14 +36,14 @@ const Navbar = () => {
 
     // const loggedIn =
     //     isAuthenticated();
-    const [loggedIn, setLoggedIn] =
-    useState(isAuthenticated());
+    // const [loggedIn, setLoggedIn] = useState(isAuthenticated()); //Bug-taking data from local storage
+    const loggedIn = useSelector((state: RootState) => state.auth.isAuthenticated); //taking data from redux state
+    const dispatch = useDispatch<AppDispatch>();
 
     const handleLogout = () => {
-
         clearToken();
-
         navigate("/login");
+        dispatch(logout());
     };
 
     const menuItems = [

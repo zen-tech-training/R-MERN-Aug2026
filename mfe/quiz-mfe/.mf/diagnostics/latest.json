@@ -1,0 +1,10 @@
+{
+  "latestErrorEvent": {
+    "code": "TYPE-001",
+    "message": "Failed to generate type declaration. Execute the below cmd to reproduce and fix the error. #TYPE-001\nargs: {\"cmd\":\"npx tsc --project C:\\\\Projects\\\\react\\\\mfe\\\\quiz-mfe\\\\node_modules\\\\.federation\\\\tsconfig.db3a3c521ed6ada96026e42aed53cf7a.json\"}\nView the docs to see how to solve: https://module-federation.io/guide/troubleshooting/type#type-001",
+    "args": {
+      "cmd": "npx tsc --project C:\\Projects\\react\\mfe\\quiz-mfe\\node_modules\\.federation\\tsconfig.db3a3c521ed6ada96026e42aed53cf7a.json"
+    },
+    "timestamp": 1781671571835
+  }
+}

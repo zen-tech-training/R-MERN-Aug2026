@@ -32,7 +32,7 @@ export const loginUser = createAsyncThunk(
   'auth/loginUser',
   async (loginData: LoginRequest, { rejectWithValue }) => {
     try {
-      const response = await apiLogin(loginData);
+      const response = await apiLogin(loginData);  //login(loginData)
       // Assuming your backend responds with { token, userId, username, userRole }
       const data = response.data;
       
